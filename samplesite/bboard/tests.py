@@ -1,14 +1,26 @@
 # Create your tests here.
 
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse, resolve
+from bboard import views
+import inspect
 
 
 class IndexViewTests(TestCase):
-    def test_index_returns_200_and_has_corect_url(self):
+    def test_index_url_is_correct(self):
         url = reverse('bboard:index')
-        # Check that the URL is correct
         self.assertEqual(url, '/bboard/')
+
+    def test_public_path_resolves_to_named_route(self):
+        match = resolve('/bboard/')
+        self.assertEqual(match.view_name, 'bboard:index')
+    
+    def test_public_path_resolves_to_correct_fbv(self):
+        match = resolve('/bboard/')
+        # Распакуем декораторы, чтобы сравнить с исходной функцией
+        self.assertIs(inspect.unwrap(match.func), views.index)
+
+    def test_index_returns_200(self):
+        url = reverse('bboard:index')
         resp = self.client.get(url)
-        # Check that the response is 200 OK.
         self.assertEqual(resp.status_code, 200)
