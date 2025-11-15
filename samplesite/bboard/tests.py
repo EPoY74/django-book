@@ -1,9 +1,11 @@
 # Create your tests here.
 
-from django.test import TestCase
-from django.urls import reverse, resolve
-from bboard import views
 import inspect
+
+from django.test import TestCase
+from django.urls import resolve, reverse
+
+from bboard import views
 
 
 class IndexViewTests(TestCase):
