@@ -11,7 +11,7 @@ class Bb(models.Model):
                                      verbose_name="дата публикации"
                                      )
     
-class Meta:
-        verbose_name = "Объявление"
-        verbose_name_plural = "Объявления"
-        ordering = ['-published']
+    class Meta:
+            verbose_name = "Объявление"
+            verbose_name_plural = "Объявления"
+            ordering = ['-published']
